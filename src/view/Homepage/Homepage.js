@@ -1,32 +1,24 @@
-import s from './Homepage.module.css';
-import { Component } from 'react';
-import axios from 'axios';
+import s from "./Homepage.module.css";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-import MoviesList from 'components/MoviesList';
+import MoviesList from "components/MoviesList";
+import moviesOperations from "redux/movies/movies-operations";
 
-export default class Homepage extends Component {
-  state = {
-    movies: [],
-  };
+export default function Homepage() {
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies.items.results);
+  console.log("🚀 ~ file: Homepage.js ~ line 40 ~ Homepage ~ movies", movies);
 
-  async componentDidMount() {
-    const response = await axios.get(
-      'https://api.themoviedb.org/3/trending/movie/day?api_key=cac5c08a938bff767b15f4beaa543e5a',
-    );
+  useEffect(() => {
+    dispatch(moviesOperations.fetchMovies());
+  }, [dispatch]);
 
-    this.setState({
-      movies: response.data.results,
-    });
-  }
-
-  render() {
-    const { movies } = this.state;
-
-    return (
-      <div className={`container`}>
-        <h1 className={s.title}>Trending today</h1>
-        <MoviesList movies={movies} />
-      </div>
-    );
-  }
+  return (
+    <div className={`container`}>
+      <h1 className={s.title}>Trending today</h1>
+      {movies && <MoviesList movies={movies} />}
+    </div>
+  );
 }

@@ -8,9 +8,6 @@ import {
 
 const items = createReducer([], {
   [fetchMoviesSuccess]: (state, { payload }) => payload,
-  // [addContactSuccess]: (state, { payload }) => [...state, payload],
-  // [deleteContactSuccess]: (state, { payload }) =>
-  //   state.filter(({ id }) => id !== payload),
 });
 
 export default combineReducers({

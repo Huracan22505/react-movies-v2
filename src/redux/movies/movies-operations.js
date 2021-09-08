@@ -3,13 +3,15 @@ import {
   fetchMoviesRequest,
   fetchMoviesSuccess,
   fetchMoviesError,
-} from "./contacts-actions";
+} from "./movies-actions";
 
 const fetchMovies = () => async (dispatch) => {
   dispatch(fetchMoviesRequest());
 
   try {
-    const { data } = await axios.get("/movies");
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/trending/movie/day?api_key=cac5c08a938bff767b15f4beaa543e5a"
+    );
 
     dispatch(fetchMoviesSuccess(data));
   } catch (error) {
