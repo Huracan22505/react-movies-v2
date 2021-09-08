@@ -15,14 +15,7 @@ import logger from "redux-logger";
 import moviesReducer from "./movies/movies-reducer";
 // import { authReducer } from "./auth";
 
-const middleware = [
-  // ...getDefaultMiddleware({
-  //   serializableCheck: {
-  //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //   },
-  // }),
-  logger,
-];
+const middleware = [...getDefaultMiddleware(), logger];
 
 // const authPersistConfig = {
 //   key: "auth",
