@@ -1,41 +1,41 @@
-import s from './Reviews.module.css';
-import React, { Component } from 'react';
-import axios from 'axios';
+import s from "./Reviews.module.css";
+import React, { useState, useEffect } from "react";
+import { useRouteMatch } from "react-router";
 
-class Reviews extends Component {
-  state = {
-    reviews: [],
-  };
+import axios from "axios";
 
-  async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
-    );
+function Reviews() {
+  const [reviews, setReviews] = useState([]);
+  const match = useRouteMatch();
 
-    this.setState({
-      reviews: response.data.results,
-    });
-  }
+  useEffect(() => {
+    const { movieId } = match.params;
 
-  render() {
-    const { reviews } = this.state;
+    async function fetch() {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`
+      );
 
-    return reviews.length > 0 ? (
-      <ul className={`${s.list} list`}>
-        {reviews.map(({ id, author, content }) => {
-          return (
-            <li className={s.item} key={id}>
-              <h4 className={s.title}>{`Author: ${author}`}</h4>
-              <p className={s.text}>{content}</p>
-            </li>
-          );
-        })}
-      </ul>
-    ) : (
-      <p>We don't have any rewiews for this movie</p>
-    );
-  }
+      setReviews([...response.data.results]);
+    }
+
+    fetch();
+  }, [match.params]);
+
+  return reviews ? (
+    <ul className={`${s.list} list`}>
+      {reviews.map(({ id, author, content }) => {
+        return (
+          <li className={s.item} key={id}>
+            <h4 className={s.title}>{`Author: ${author}`}</h4>
+            <p className={s.text}>{content}</p>
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <p>We don't have any reviews for this movie</p>
+  );
 }
 
 export default Reviews;
