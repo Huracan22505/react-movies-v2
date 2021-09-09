@@ -7,7 +7,10 @@ import {
 } from "./movies-actions";
 
 const items = createReducer([], {
-  [fetchMoviesSuccess]: (state, { payload }) => payload,
+  [fetchMoviesSuccess]: (state, { payload }) => {
+    console.log(payload);
+    return [...state, ...payload.results];
+  },
 });
 
 export default combineReducers({
