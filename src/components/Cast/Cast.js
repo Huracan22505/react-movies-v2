@@ -5,7 +5,7 @@ import defaultImage from "./defaultImg.png";
 import { useRouteMatch } from "react-router";
 
 function Cast() {
-  const [casts, setCasts] = useState({});
+  const [casts, setCasts] = useState([]);
   const match = useRouteMatch();
 
   useEffect(() => {
@@ -16,9 +16,7 @@ function Cast() {
         `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`
       );
 
-      setCasts({
-        items: [...response.data.cast],
-      });
+      setCasts([...response.data.cast]);
     }
 
     fetch();
@@ -26,8 +24,8 @@ function Cast() {
 
   return (
     <ul className={`${s.list} list`}>
-      {casts.items &&
-        casts.items.map((el) => {
+      {casts &&
+        casts.map((el) => {
           return (
             <li className={s.item} key={el.credit_id}>
               <img
