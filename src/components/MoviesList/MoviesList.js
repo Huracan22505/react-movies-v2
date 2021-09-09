@@ -2,9 +2,13 @@ import s from "./MoviesList.module.css";
 import { Link, withRouter } from "react-router-dom";
 
 const MoviesList = ({ movies, location }) => {
+  console.log(
+    "🚀 ~ file: MoviesList.js ~ line 5 ~ MoviesList ~ location",
+    location
+  );
   return (
     <ul className={`${s.list} list`}>
-      {movies.map(({ id, poster_path }) => (
+      {movies.map(({ id, title, poster_path }) => (
         <li className={s.item} key={id}>
           <Link
             to={{
@@ -15,7 +19,7 @@ const MoviesList = ({ movies, location }) => {
             <img
               className={s.img}
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-              alt=""
+              alt={title}
               width={280}
             ></img>
           </Link>
