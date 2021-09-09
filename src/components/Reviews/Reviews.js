@@ -22,7 +22,7 @@ function Reviews() {
     fetch();
   }, [match.params]);
 
-  return reviews ? (
+  return reviews.length ? (
     <ul className={`${s.list} list`}>
       {reviews.map(({ id, author, content }) => {
         return (
