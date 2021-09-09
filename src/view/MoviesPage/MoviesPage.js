@@ -1,76 +1,65 @@
 import s from "./MoviesPage.module.css";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation, useHistory } from "react-router-dom";
 
 import MoviesList from "components/MoviesList";
 
-class MoviesPage extends Component {
-  state = {
-    query: "",
-    movies: [],
+function MoviesPage() {
+  const [query, setQuery] = useState("");
+  const [movies, setMovies] = useState([]);
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (location.search) fetch(location.search.slice(7));
+  }, [location.search]);
+
+  const handleChange = (e) => {
+    setQuery(e.currentTarget.value.toLowerCase());
   };
 
-  componentDidMount() {
-    if (this.props.location.search) {
-      this.fetch(this.props.location.search.slice(7));
-    }
-  }
-
-  handleChange = (e) => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
-  };
-
-  handleSubmit = (e) => {
-    const { location, history } = this.props;
-
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (this.state.query.trim() === "") {
+    if (query.trim() === "") {
       alert("Вы ввели пустой запрос!");
       return;
     }
 
-    this.fetch(this.state.query);
+    fetch(query);
 
-    history.push({ ...location, search: `query=${this.state.query}` });
+    history.push({ ...location, search: `query=${query}` });
 
     // this.setState({ query: '' });
   };
 
-  fetch = (query) => {
+  const fetch = (query) => {
     return axios
       .get(
         `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US&page=1&include_adult=false`
       )
-      .then((response) =>
-        this.setState({
-          movies: response.data.results,
-        })
-      );
+      .then((response) => setMovies([...response.data.results]));
   };
 
-  render() {
-    const { movies } = this.state;
+  return (
+    <div className={`container ${s.container}`}>
+      <form className={s.searchForm} onSubmit={handleSubmit}>
+        <input
+          className={s.searchFormInput}
+          type="text"
+          placeholder="Search movies"
+          value={query}
+          onChange={handleChange}
+        />
+        <button type="submit">
+          <span className={s.searchFormButtonLabel}>Search</span>
+        </button>
+      </form>
 
-    return (
-      <div className={`container ${s.container}`}>
-        <form className={s.searchForm} onSubmit={this.handleSubmit}>
-          <input
-            className={s.searchFormInput}
-            type="text"
-            placeholder="Search movies"
-            value={this.state.query}
-            onChange={this.handleChange}
-          />
-          <button type="submit">
-            <span className={s.searchFormButtonLabel}>Search</span>
-          </button>
-        </form>
-
-        <MoviesList movies={movies} />
-      </div>
-    );
-  }
+      {movies && <MoviesList movies={movies} />}
+    </div>
+  );
 }
 
 export default MoviesPage;
