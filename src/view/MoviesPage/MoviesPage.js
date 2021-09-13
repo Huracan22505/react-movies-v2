@@ -34,12 +34,11 @@ function MoviesPage() {
     // this.setState({ query: '' });
   };
 
-  const fetch = (query) => {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US&page=1&include_adult=false`
-      )
-      .then((response) => setMovies([...response.data.results]));
+  const fetch = async (query) => {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US&page=1&include_adult=false`
+    );
+    return setMovies([...response.data.results]);
   };
 
   return (

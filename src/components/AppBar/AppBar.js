@@ -1,11 +1,11 @@
-import s from './AppBar.module.css';
+import s from "./AppBar.module.css";
 
-import Navigation from 'components/Navigation';
+import Navigation from "components/Navigation";
 
 const AppBar = () => {
   return (
-    <header>
-      <div className={'container'}>
+    <header className={s.header}>
+      <div className={"container"}>
         <Navigation />
       </div>
     </header>

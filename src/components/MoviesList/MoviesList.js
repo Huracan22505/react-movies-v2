@@ -2,10 +2,6 @@ import s from "./MoviesList.module.css";
 import { Link, withRouter } from "react-router-dom";
 
 const MoviesList = ({ movies, location }) => {
-  console.log(
-    "🚀 ~ file: MoviesList.js ~ line 5 ~ MoviesList ~ location",
-    location
-  );
   return (
     <ul className={`${s.list} list`}>
       {movies.map(({ id, title, poster_path }) => (
