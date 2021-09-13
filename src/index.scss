@@ -45,12 +45,31 @@ a {
 }
 
 .container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 120px;
-  padding-right: 120px;
-
   width: 1440px;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1439px) {
+    padding-left: 200px;
+    padding-right: 200px;
+
+    width: 1200px;
+  }
+
+  @media screen and (max-width: 1199px) {
+    padding-left: 100px;
+    padding-right: 100px;
+
+    width: 768px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    width: 320px;
+  }
 }
 
 /* for practice */
@@ -61,5 +80,5 @@ a {
 }
 
 .navLinkActive {
-  color: palevioletred;
+  color: rgb(201, 233, 21);
 }
