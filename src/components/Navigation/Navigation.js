@@ -1,6 +1,6 @@
-import s from './Navigation.module.css';
-import routes from 'routes';
-import { NavLink } from 'react-router-dom';
+import s from "./Navigation.module.css";
+import routes from "routes";
+import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
@@ -16,6 +16,17 @@ const Navigation = () => {
             Home
           </NavLink>
         </li>
+        <li className={s.item}>
+          <NavLink
+            exact
+            to={routes.favorite}
+            className="navLink"
+            activeClassName="navLinkActive"
+          >
+            Favorite
+          </NavLink>
+        </li>
+
         <li className={s.item}>
           <NavLink
             to={routes.movies}

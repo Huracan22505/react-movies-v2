@@ -1,6 +1,6 @@
 import s from "./MovieDetailsPage.module.css";
 import axios from "axios";
-import React, { lazy, Suspense, useState, useEffect } from "react";
+import React, { lazy, Suspense, useState, useEffect, useRef } from "react";
 import {
   Route,
   NavLink,
@@ -27,6 +27,7 @@ export default function MovieDetailsPage() {
   const location = useLocation();
   const history = useHistory();
   const match = useRouteMatch();
+  const favoriteBtn = useRef(null);
 
   useEffect(() => {
     const { movieId } = match.params;
@@ -44,12 +45,40 @@ export default function MovieDetailsPage() {
     fetch();
   }, [match.params]);
 
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem("favorite"));
+    const ids = [];
+    localStorageData.forEach((el) => ids.push(el.id));
+
+    if (ids.includes(detailsPage.id)) {
+      favoriteBtn.current.textContent = "Remove from favorite";
+    } else {
+      favoriteBtn.current.textContent = "Add to favorite";
+    }
+  }, [detailsPage.id]);
+
   const handleGoBack = () => {
     // if (location.state && location.state.from) {
     //   return history.push(location.state.from);
     // }
 
     history.push(location?.state?.from || routes.home);
+  };
+
+  const handleAddToFavorite = (e) => {
+    const data = JSON.parse(localStorage.getItem("favorite"));
+
+    if (e.target.textContent === "Add to favorite") {
+      data.push(detailsPage);
+      localStorage.setItem("favorite", JSON.stringify(data));
+      e.target.textContent = "Remove from favorite";
+    } else {
+      localStorage.setItem(
+        "favorite",
+        JSON.stringify(data.filter((el) => el.id !== detailsPage.id))
+      );
+      e.target.textContent = "Add to favorite";
+    }
   };
 
   const { title, vote_average, overview, genres, poster_path } = detailsPage;
@@ -63,6 +92,12 @@ export default function MovieDetailsPage() {
       <button className={s.button} type="button" onClick={handleGoBack}>
         Go back
       </button>
+      <button
+        ref={favoriteBtn}
+        className={s.button}
+        type="button"
+        onClick={handleAddToFavorite}
+      ></button>
       <div className={s.container}>
         <img className={s.img} src={imageCheck} alt=""></img>
         <div className={s.textContainer}>
