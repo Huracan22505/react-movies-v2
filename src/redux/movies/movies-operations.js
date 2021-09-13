@@ -3,6 +3,7 @@ import {
   fetchMoviesRequest,
   fetchMoviesSuccess,
   fetchMoviesError,
+  resetMovies,
 } from "./movies-actions";
 
 const fetchMovies = (page) => async (dispatch) => {
@@ -24,6 +25,11 @@ const fetchMovies = (page) => async (dispatch) => {
   //   .catch(error => dispatch(fetchContactsError(error)));
 };
 
+const resetStore = () => (dispatch) => {
+  dispatch(resetMovies());
+};
+
 export default {
   fetchMovies,
+  resetStore,
 };

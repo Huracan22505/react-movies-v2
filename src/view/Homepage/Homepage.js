@@ -11,11 +11,14 @@ export default function Homepage() {
 
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.items);
-  console.log("🚀 ~ file: Homepage.js ~ line 14 ~ Homepage ~ movies", movies);
 
   useEffect(() => {
     dispatch(moviesOperations.fetchMovies(page));
   }, [dispatch, page]);
+
+  useEffect(() => {
+    return dispatch(moviesOperations.resetStore());
+  }, [dispatch]);
 
   return (
     <div className={`container`}>

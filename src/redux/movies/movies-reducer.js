@@ -4,13 +4,12 @@ import {
   fetchMoviesRequest,
   fetchMoviesSuccess,
   fetchMoviesError,
+  resetMovies,
 } from "./movies-actions";
 
 const items = createReducer([], {
-  [fetchMoviesSuccess]: (state, { payload }) => {
-    console.log(payload);
-    return [...state, ...payload.results];
-  },
+  [fetchMoviesSuccess]: (state, { payload }) => [...state, ...payload.results],
+  [resetMovies]: (state, { payload }) => [],
 });
 
 export default combineReducers({
