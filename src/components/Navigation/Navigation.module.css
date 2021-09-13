@@ -1,8 +1,11 @@
 .list {
   display: flex;
-  justify-content: space-evenly;
 }
 
 .item {
-  font-size: 40px;
+  font-size: 30px;
+}
+
+.item + .item {
+  margin-left: 20px;
 }
