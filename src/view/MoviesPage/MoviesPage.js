@@ -43,16 +43,16 @@ function MoviesPage() {
 
   return (
     <div className={`container ${s.container}`}>
-      <form className={s.searchForm} onSubmit={handleSubmit}>
+      <form className={s.form} onSubmit={handleSubmit}>
         <input
-          className={s.searchFormInput}
+          className={s.input}
           type="text"
           placeholder="Search movies"
           value={query}
           onChange={handleChange}
         />
-        <button type="submit">
-          <span className={s.searchFormButtonLabel}>Search</span>
+        <button className={s.btn} type="submit">
+          Search
         </button>
       </form>
 

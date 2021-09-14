@@ -2,6 +2,53 @@
   text-align: center;
 }
 
-.searchForm {
+.form {
   margin-bottom: 20px;
+}
+
+.btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  cursor: pointer;
+  display: block;
+
+  height: 45px;
+
+  border-radius: 45px;
+  border-color: transparent;
+  font-size: 11px;
+  line-height: 45px;
+
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #ffffff;
+  background: silver;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #f041ca;
+  box-shadow: 0 15px 20px rgba(241, 57, 171, 0.4);
+  color: #000000;
+  border-color: #330099;
+  transform: translateY(-7px);
+}
+
+.input {
+  padding: 6px;
+
+  background-color: rgba(241, 57, 171, 0.4);
+  border: none;
+  border-radius: 6px;
+
+  font-size: 26px;
 }
