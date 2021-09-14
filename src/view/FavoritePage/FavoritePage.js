@@ -12,7 +12,7 @@ export default function FavoritePage() {
       {movies.length > 0 ? (
         <MoviesList movies={movies} />
       ) : (
-        <p>Add some movies to favorite</p>
+        <p className={s.text}>Add some movies to favorite</p>
       )}
     </div>
   );

@@ -2,11 +2,10 @@ import { Suspense, lazy, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import s from "./App.module.css";
 import { Route, Switch } from "react-router-dom";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
 
 import routes from "routes";
 import AppBar from "components/AppBar";
+import Loader from "components/Loader/Loader";
 
 const Homepage = lazy(() =>
   import("view/Homepage" /* webpackChunkName: "Homepage" */)
@@ -32,17 +31,7 @@ const App = () => {
     <>
       <AppBar />
 
-      <Suspense
-        fallback={
-          <Loader
-            type="Puff"
-            color="#00BFFF"
-            height={100}
-            width={100}
-            timeout={3000}
-          />
-        }
-      >
+      <Suspense fallback={Loader()}>
         <Switch>
           <Route exact path={routes.home} component={Homepage} />
           <Route exact path={routes.movies} component={MoviesPage} />

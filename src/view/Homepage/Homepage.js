@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MoviesList from "components/MoviesList";
 import moviesOperations from "redux/movies/movies-operations";
+import Loader from "components/Loader/Loader";
 
 export default function Homepage() {
   const [page, setPage] = useState(1);
@@ -29,7 +30,7 @@ export default function Homepage() {
           dataLength={movies.length}
           next={() => setPage(page + 1)}
           hasMore={true}
-          loader={<h4>Loading...</h4>}
+          loader={Loader()}
         >
           <MoviesList movies={movies} />
         </InfiniteScroll>
