@@ -4,6 +4,21 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  transition: 1s;
+  animation: mainAnimation 1s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+
+@keyframes mainAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(2%);
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .item {
