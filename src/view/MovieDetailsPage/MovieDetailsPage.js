@@ -15,7 +15,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import moviesOperations from "redux/movies/movies-operations";
 
-// import defaultImage from "components/Cast/defaultImg.png";
 import defaultImage from "../../images/loading.gif";
 
 const Cast = lazy(() =>
