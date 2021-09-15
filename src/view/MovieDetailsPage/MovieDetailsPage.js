@@ -15,7 +15,8 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import moviesOperations from "redux/movies/movies-operations";
 
-import defaultImage from "components/Cast/defaultImg.png";
+// import defaultImage from "components/Cast/defaultImg.png";
+import defaultImage from "../../images/loading.gif";
 
 const Cast = lazy(() =>
   import("components/Cast" /* webpackChunkName: "Cast" */)
@@ -92,7 +93,7 @@ export default function MovieDetailsPage() {
         onClick={handleAddToFavorite}
       ></button>
       <div className={s.container}>
-        <img className={s.img} src={imageCheck} alt=""></img>
+        <img className={s.img} src={imageCheck} width={300} alt=""></img>
         <div className={s.textContainer}>
           <h3 className={s.name}>{title}</h3>
           <p className={s.text}>User Score: {`${vote_average * 10}%`}</p>
