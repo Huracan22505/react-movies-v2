@@ -1,6 +1,7 @@
 import s from "./MovieDetailsPage.module.css";
 import axios from "axios";
 import React, { lazy, Suspense, useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import {
   Route,
   NavLink,
@@ -12,6 +13,7 @@ import {
 import routes from "routes";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import moviesOperations from "redux/movies/movies-operations";
 
 import defaultImage from "components/Cast/defaultImg.png";
 
@@ -24,9 +26,12 @@ const Reviews = lazy(() =>
 
 export default function MovieDetailsPage() {
   const [detailsPage, setDetailsPage] = useState({});
+
+  const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
   const match = useRouteMatch();
+
   const favoriteBtn = useRef(null);
 
   useEffect(() => {
@@ -66,19 +71,7 @@ export default function MovieDetailsPage() {
   };
 
   const handleAddToFavorite = (e) => {
-    const data = JSON.parse(localStorage.getItem("favorite"));
-
-    if (e.target.textContent === "Add to favorite") {
-      data.push(detailsPage);
-      localStorage.setItem("favorite", JSON.stringify(data));
-      e.target.textContent = "Remove from favorite";
-    } else {
-      localStorage.setItem(
-        "favorite",
-        JSON.stringify(data.filter((el) => el.id !== detailsPage.id))
-      );
-      e.target.textContent = "Add to favorite";
-    }
+    dispatch(moviesOperations.setCounter(e, detailsPage));
   };
 
   const { title, vote_average, overview, genres, poster_path } = detailsPage;

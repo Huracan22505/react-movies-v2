@@ -72,13 +72,40 @@ a {
   }
 }
 
-/* for practice */
+/* NAVIGATION */
 
 .navLink {
+  position: relative;
+
   font-size: inherit;
   color: currentColor;
 }
 
 .navLinkActive {
   color: rgb(201, 233, 21);
+
+  cursor: default;
+}
+
+.fav-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(54px, -90%);
+
+  font-size: 16px;
+  line-height: 0.6;
+  color: white;
+
+  background-color: red;
+
+  border-radius: 50%;
 }

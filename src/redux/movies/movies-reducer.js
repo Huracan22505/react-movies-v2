@@ -5,6 +5,7 @@ import {
   fetchMoviesSuccess,
   fetchMoviesError,
   resetMovies,
+  setFavoriteCounter,
 } from "./movies-actions";
 
 const items = createReducer([], {
@@ -12,6 +13,11 @@ const items = createReducer([], {
   [resetMovies]: (state, { payload }) => [],
 });
 
+const favoriteCount = createReducer(0, {
+  [setFavoriteCounter]: (state, { payload }) => payload,
+});
+
 export default combineReducers({
   items,
+  favoriteCount,
 });

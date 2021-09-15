@@ -4,6 +4,7 @@ import {
   fetchMoviesSuccess,
   fetchMoviesError,
   resetMovies,
+  setFavoriteCounter,
 } from "./movies-actions";
 
 const fetchMovies = (page) => async (dispatch) => {
@@ -29,7 +30,33 @@ const resetStore = () => (dispatch) => {
   dispatch(resetMovies());
 };
 
+const setCounter = (e, detailsPage) => (dispatch) => {
+  const data = JSON.parse(localStorage.getItem("favorite"));
+
+  if (e.target.textContent === "Add to favorite") {
+    data.push(detailsPage);
+    localStorage.setItem("favorite", JSON.stringify(data));
+    e.target.textContent = "Remove from favorite";
+
+    dispatch(setFavoriteCounter(data.length));
+  } else {
+    const newData = data.filter((el) => el.id !== detailsPage.id);
+    localStorage.setItem("favorite", JSON.stringify(newData));
+    e.target.textContent = "Add to favorite";
+
+    dispatch(setFavoriteCounter(newData.length));
+  }
+};
+
+const getCounter = () => (dispatch) => {
+  const data = JSON.parse(localStorage.getItem("favorite"));
+
+  dispatch(setFavoriteCounter(data.length));
+};
+
 export default {
   fetchMovies,
   resetStore,
+  setCounter,
+  getCounter,
 };

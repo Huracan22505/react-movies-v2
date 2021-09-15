@@ -5,3 +5,5 @@ export const fetchMoviesSuccess = createAction("movies/fetchMoviesSuccess");
 export const fetchMoviesError = createAction("movies/fetchMoviesError");
 
 export const resetMovies = createAction("movies/resetMovies");
+
+export const setFavoriteCounter = createAction("movies/setFavoriteCounter");

@@ -1,8 +1,20 @@
-import s from "./Navigation.module.css";
 import routes from "routes";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import s from "./Navigation.module.css";
 
 const Navigation = () => {
+  const [count, setCount] = useState(
+    JSON.parse(localStorage.getItem("favorite")).length
+  );
+
+  const counter = useSelector((state) => state.movies.favoriteCount);
+
+  useEffect(() => {
+    setCount(counter);
+  }, [counter]);
+
   return (
     <nav>
       <ul className={`${s.list} list`}>
@@ -23,7 +35,7 @@ const Navigation = () => {
             className="navLink"
             activeClassName="navLinkActive"
           >
-            Favorite
+            Favorite <div className="fav-counter">{count}</div>
           </NavLink>
         </li>
 

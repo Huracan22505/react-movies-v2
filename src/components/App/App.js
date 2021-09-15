@@ -2,6 +2,8 @@ import { Suspense, lazy, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import s from "./App.module.css";
 import { Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import moviesOperations from "redux/movies/movies-operations";
 
 import routes from "routes";
 import AppBar from "components/AppBar";
@@ -21,11 +23,17 @@ const MovieDetailsPage = lazy(() =>
 );
 
 const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!localStorage.getItem("favorite")) {
       localStorage.setItem("favorite", JSON.stringify([]));
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(moviesOperations.getCounter());
+  }, [dispatch]);
 
   return (
     <>
