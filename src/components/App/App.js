@@ -21,12 +21,6 @@ const MovieDetailsPage = lazy(() =>
 );
 
 const App = () => {
-  useEffect(() => {
-    if (!localStorage.getItem("favorite")) {
-      localStorage.setItem("favorite", JSON.stringify([]));
-    }
-  }, []);
-
   return (
     <>
       <AppBar />

@@ -19,6 +19,10 @@ const Navigation = () => {
   }, [counter]);
 
   useEffect(() => {
+    if (!localStorage.getItem("favorite")) {
+      localStorage.setItem("favorite", JSON.stringify([]));
+    }
+
     dispatch(moviesOperations.getCounter());
   }, [dispatch]);
 
