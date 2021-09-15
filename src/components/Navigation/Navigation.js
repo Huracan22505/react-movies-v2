@@ -10,9 +10,7 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
   const dispatch = useDispatch();
 
-  const [count, setCount] = useState(
-    JSON.parse(localStorage.getItem("favorite")).length
-  );
+  const [count, setCount] = useState();
 
   const counter = useSelector((state) => state.movies.favoriteCount);
 
