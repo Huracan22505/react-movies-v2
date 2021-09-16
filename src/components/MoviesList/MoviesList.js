@@ -1,5 +1,5 @@
 import s from "./MoviesList.module.css";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Movie from "components/Movie";
 
 const MoviesList = ({ movies, location }) => (

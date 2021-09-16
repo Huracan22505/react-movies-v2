@@ -30,7 +30,7 @@ export default function Homepage() {
           dataLength={movies.length}
           next={() => setPage(page + 1)}
           hasMore={true}
-          // loader={Loader()}
+          loader={Loader()}
         >
           <MoviesList movies={movies} />
         </InfiniteScroll>

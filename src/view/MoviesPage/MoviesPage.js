@@ -8,6 +8,7 @@ import MoviesList from "components/MoviesList";
 function MoviesPage() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
+
   const location = useLocation();
   const history = useHistory();
 
