@@ -41,22 +41,22 @@ const Navigation = () => {
         </li>
         <li className={s.item}>
           <NavLink
+            to={routes.movies}
+            className="navLink"
+            activeClassName="navLinkActive"
+          >
+            Movies
+          </NavLink>
+        </li>
+
+        <li className={s.item}>
+          <NavLink
             exact
             to={routes.favorite}
             className="navLink"
             activeClassName="navLinkActive"
           >
             Favorite <div className="fav-counter">{count}</div>
-          </NavLink>
-        </li>
-
-        <li className={s.item}>
-          <NavLink
-            to={routes.movies}
-            className="navLink"
-            activeClassName="navLinkActive"
-          >
-            Movies
           </NavLink>
         </li>
       </ul>

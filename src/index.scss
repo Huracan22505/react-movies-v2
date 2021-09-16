@@ -11,6 +11,10 @@ body {
   background-color: rgb(184, 70, 219);
 
   overflow-x: hidden;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
 }
 
 code {
@@ -28,6 +32,10 @@ h6,
 p {
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  color: rgb(177, 211, 122);
 }
 
 .list {
