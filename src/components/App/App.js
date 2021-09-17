@@ -1,23 +1,22 @@
-import { Suspense, lazy, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import s from "./App.module.css";
-import { Route, Switch } from "react-router-dom";
+import { Suspense, lazy } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { Route, Switch } from 'react-router-dom';
 
-import routes from "routes";
-import AppBar from "components/AppBar";
-import Loader from "components/Loader/Loader";
+import routes from 'routes';
+import AppBar from 'components/AppBar';
+import Loader from 'components/Loader/Loader';
 
 const Homepage = lazy(() =>
-  import("view/Homepage" /* webpackChunkName: "Homepage" */)
+  import('view/Homepage' /* webpackChunkName: "Homepage" */),
 );
 const MoviesPage = lazy(() =>
-  import("view/MoviesPage" /* webpackChunkName: "MoviesPage" */)
+  import('view/MoviesPage' /* webpackChunkName: "MoviesPage" */),
 );
 const FavoritePage = lazy(() =>
-  import("view/FavoritePage" /* webpackChunkName: "FavoritePage" */)
+  import('view/FavoritePage' /* webpackChunkName: "FavoritePage" */),
 );
 const MovieDetailsPage = lazy(() =>
-  import("view/MovieDetailsPage" /* webpackChunkName: "MovieDetailsPage" */)
+  import('view/MovieDetailsPage' /* webpackChunkName: "MovieDetailsPage" */),
 );
 
 const App = () => {
