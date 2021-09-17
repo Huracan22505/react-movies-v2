@@ -32,6 +32,7 @@ export default function Homepage() {
           hasMore={true}
           loader={Loader()}
           scrollThreshold={1}
+          style={{ overflow: 'visible' }}
         >
           <MoviesList movies={movies} />
         </InfiniteScroll>
