@@ -1,15 +1,12 @@
 import axios from 'axios';
 import {
-  fetchMoviesRequest,
   fetchMoviesSuccess,
-  fetchMoviesError,
+  fetchCastSuccess,
   resetMovies,
   setFavoriteCounter,
 } from './movies-actions';
 
 const fetchMovies = page => async dispatch => {
-  dispatch(fetchMoviesRequest());
-
   try {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/movie/day?api_key=cac5c08a938bff767b15f4beaa543e5a&page=${page}`,
@@ -17,7 +14,7 @@ const fetchMovies = page => async dispatch => {
 
     dispatch(fetchMoviesSuccess(data));
   } catch (error) {
-    dispatch(fetchMoviesError(error.message));
+    alert(`${error.message}`);
   }
 
   // axios

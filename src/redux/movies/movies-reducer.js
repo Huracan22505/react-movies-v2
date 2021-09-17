@@ -1,12 +1,10 @@
-import { combineReducers } from "redux";
-import { createReducer } from "@reduxjs/toolkit";
+import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
 import {
-  fetchMoviesRequest,
   fetchMoviesSuccess,
-  fetchMoviesError,
   resetMovies,
   setFavoriteCounter,
-} from "./movies-actions";
+} from './movies-actions';
 
 const items = createReducer([], {
   [fetchMoviesSuccess]: (state, { payload }) => [...state, ...payload.results],
