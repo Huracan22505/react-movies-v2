@@ -1,19 +1,30 @@
-import s from "./Cast.module.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import defaultImage from "./defaultImg.png";
-import { useRouteMatch } from "react-router";
+import s from './Cast.module.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import defaultImage from './defaultImg.png';
+import { useRouteMatch } from 'react-router';
+
+interface IMatchParams {
+  params: { movieId: string };
+}
+
+interface ICast {
+  credit_id: number;
+  profile_path: string;
+  name: string;
+  character: string;
+}
 
 function Cast() {
-  const [casts, setCasts] = useState([]);
-  const match = useRouteMatch();
+  const [casts, setCasts] = useState<ICast[]>([]);
+  const match: IMatchParams = useRouteMatch();
 
   useEffect(() => {
     const { movieId } = match.params;
 
     async function fetch() {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
       );
 
       setCasts([...response.data.cast]);
@@ -25,7 +36,7 @@ function Cast() {
   return (
     <ul className={`${s.list} list`}>
       {casts &&
-        casts.map((el) => {
+        casts.map((el: ICast) => {
           return (
             <li className={s.item} key={el.credit_id}>
               <img
