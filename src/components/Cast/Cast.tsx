@@ -17,6 +17,7 @@ interface ICast {
 
 function Cast() {
   const [casts, setCasts] = useState<ICast[]>([]);
+
   const match: IMatchParams = useRouteMatch();
 
   useEffect(() => {
@@ -36,23 +37,21 @@ function Cast() {
   return (
     <ul className={`${s.list} list`}>
       {casts &&
-        casts.map((el: ICast) => {
-          return (
-            <li className={s.item} key={el.credit_id}>
-              <img
-                className={s.img}
-                src={
-                  el.profile_path
-                    ? `https://image.tmdb.org/t/p/w500/${el.profile_path}`
-                    : `${defaultImage}`
-                }
-                alt={el.name}
-              ></img>
-              <h4 className={s.title}>{el.name}</h4>
-              <p className={s.text}>{el.character}</p>
-            </li>
-          );
-        })}
+        casts.map((el: ICast) => (
+          <li className={s.item} key={el.credit_id}>
+            <img
+              className={s.img}
+              src={
+                el.profile_path
+                  ? `https://image.tmdb.org/t/p/w500/${el.profile_path}`
+                  : `${defaultImage}`
+              }
+              alt={el.name}
+            ></img>
+            <h4 className={s.title}>{el.name}</h4>
+            <p className={s.text}>{el.character}</p>
+          </li>
+        ))}
     </ul>
   );
 }
