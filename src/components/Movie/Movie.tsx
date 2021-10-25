@@ -1,19 +1,32 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import defaultImg from "images/loading.gif";
-import s from "./Movie.module.css";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import defaultImg from 'images/loading.gif';
+import s from './Movie.module.css';
 
-const Movie = ({ id, title, poster_path, location }) => {
-  const [loaded, setLoaded] = useState();
+interface ILocation {
+  hash: string;
+  pathname: string;
+  search: string;
+}
+
+interface IProps {
+  id: string;
+  title: string;
+  poster_path: string;
+  location: ILocation;
+}
+
+const Movie = ({ id, title, poster_path, location }: IProps) => {
+  const [loaded, setLoaded] = useState<boolean>();
 
   return (
-    <li className={s.item} key={id}>
+    <li className={s.item}>
       {loaded ? null : (
         <div
           style={{
             background: `url(${defaultImg}) center`,
-            height: "100%",
-            width: "100%",
+            height: '100%',
+            width: '100%',
           }}
         />
       )}
@@ -31,7 +44,7 @@ const Movie = ({ id, title, poster_path, location }) => {
               : defaultImg
           }
           onLoad={() => setLoaded(true)}
-          style={loaded ? {} : { display: "none" }}
+          style={loaded ? {} : { display: 'none' }}
           alt={title}
           width={280}
         ></img>
