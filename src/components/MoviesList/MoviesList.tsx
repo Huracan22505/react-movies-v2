@@ -1,12 +1,7 @@
 import s from './MoviesList.module.css';
 import { useLocation } from 'react-router-dom';
 import Movie from 'components/Movie';
-
-interface IMovie {
-  id: string;
-  title: string;
-  poster_path: string;
-}
+import { IMovie } from 'common/interfaces';
 
 interface IProps {
   movies: IMovie[];

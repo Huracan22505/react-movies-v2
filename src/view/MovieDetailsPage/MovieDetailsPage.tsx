@@ -1,7 +1,7 @@
-import s from "./MovieDetailsPage.module.css";
-import axios from "axios";
-import React, { lazy, Suspense, useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import s from './MovieDetailsPage.module.css';
+import axios from 'axios';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Route,
   NavLink,
@@ -9,37 +9,58 @@ import {
   useRouteMatch,
   useLocation,
   useHistory,
-} from "react-router-dom";
-import routes from "routes";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
-import moviesOperations from "redux/movies/movies-operations";
+} from 'react-router-dom';
+import routes from 'routes';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Loader from 'react-loader-spinner';
 
-import defaultImage from "../../images/loading.gif";
+import defaultImage from '../../images/loading.gif';
+import { IMovieDetails } from 'common/interfaces';
 
-const Cast = lazy(() =>
-  import("components/Cast" /* webpackChunkName: "Cast" */)
+const Cast = lazy(
+  () => import('components/Cast' /* webpackChunkName: "Cast" */),
 );
-const Reviews = lazy(() =>
-  import("components/Reviews" /* webpackChunkName: "Reviews" */)
+const Reviews = lazy(
+  () => import('components/Reviews' /* webpackChunkName: "Reviews" */),
 );
+
+interface IMatchParams {
+  path: string;
+  url: string;
+  params: { movieId: string };
+}
+
+interface ILocationState {
+  state: {
+    from: {
+      pathname: string;
+    };
+  };
+}
 
 export default function MovieDetailsPage() {
-  const [detailsPage, setDetailsPage] = useState({});
+  const [detailsPage, setDetailsPage] = useState<IMovieDetails>({
+    overview: '',
+    id: '',
+    title: '',
+    vote_average: 0,
+    genres: [],
+    poster_path: '',
+  });
 
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location: ILocationState = useLocation();
   const history = useHistory();
-  const match = useRouteMatch();
+  const match: IMatchParams = useRouteMatch();
 
-  const favoriteBtn = useRef(null);
+  const favoriteBtn = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const { movieId } = match.params;
 
     async function fetch() {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
       );
 
       setDetailsPage({
@@ -51,16 +72,25 @@ export default function MovieDetailsPage() {
   }, [match.params]);
 
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem("favorite"));
-    const ids = [];
-    localStorageData.forEach((el) => ids.push(el.id));
+    const localStore = localStorage.getItem('favorite');
+    if (typeof localStore !== 'string')
+      throw new Error('Local Storage not found');
 
-    if (ids.includes(detailsPage.id)) {
-      favoriteBtn.current.textContent = "Remove from favorite";
-    } else {
-      favoriteBtn.current.textContent = "Add to favorite";
-    }
-  }, [detailsPage.id]);
+    const localStorageData = JSON.parse(localStore);
+
+    const ids: string[] = [];
+    localStorageData.forEach((el: IMovieDetails) => ids.push(el.id));
+
+    if (!detailsPage) return;
+    if (!favoriteBtn) return;
+
+    if (null !== favoriteBtn.current)
+      if (ids.includes(detailsPage.id)) {
+        favoriteBtn.current.textContent = 'Remove from favorite';
+      } else {
+        favoriteBtn.current.textContent = 'Add to favorite';
+      }
+  }, [detailsPage]);
 
   const handleGoBack = () => {
     // if (location.state && location.state.from) {
@@ -70,11 +100,17 @@ export default function MovieDetailsPage() {
     history.push(location?.state?.from || routes.home);
   };
 
-  const handleAddToFavorite = (e) => {
-    dispatch(moviesOperations.setCounter(e, detailsPage));
+  const handleAddToFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // dispatch(moviesOperations.setCounter(e, detailsPage));
   };
 
-  const { title, vote_average, overview, genres, poster_path } = detailsPage;
+  const {
+    title,
+    vote_average,
+    overview,
+    genres,
+    poster_path,
+  }: IMovieDetails = detailsPage;
 
   const imageCheck = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -103,7 +139,7 @@ export default function MovieDetailsPage() {
             <>
               <h4 className={s.title}>Genres</h4>
               <ul className={`${s.list} list`}>
-                {genres.map((genre) => (
+                {genres.map(genre => (
                   <li key={genre.id}>{genre.name}</li>
                 ))}
               </ul>
@@ -115,8 +151,8 @@ export default function MovieDetailsPage() {
             <li>
               <NavLink
                 activeStyle={{
-                  fontWeight: "bold",
-                  color: "white",
+                  fontWeight: 'bold',
+                  color: 'white',
                 }}
                 className={s.link}
                 to={{
@@ -130,8 +166,8 @@ export default function MovieDetailsPage() {
             <li>
               <NavLink
                 activeStyle={{
-                  fontWeight: "bold",
-                  color: "white",
+                  fontWeight: 'bold',
+                  color: 'white',
                 }}
                 className={s.link}
                 to={{
