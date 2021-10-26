@@ -1,6 +1,7 @@
 export enum Actions {
   FetchMoviesRequest = 'movies/fetchMoviesRequest',
   FetchMoviesSuccess = 'movies/fetchMoviesSuccess',
-  fetchMovieByIdRequest = 'movies/fetchMovieByIdRequest',
-  fetchMovieByIdSuccess = 'movies/fetchMovieByIdSuccess',
+  FetchMovieByIdRequest = 'movies/fetchMovieByIdRequest',
+  FetchMovieByIdSuccess = 'movies/fetchMovieByIdSuccess',
+  ResetMovies = 'movies/resetMovies',
 }

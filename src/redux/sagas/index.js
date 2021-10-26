@@ -28,6 +28,6 @@ export function* fetchMovieByIdSaga(id) {
 export function* rootSaga() {
   yield all([
     takeLatest(Actions.FetchMoviesRequest, fetchMoviesSaga),
-    takeLatest(Actions.fetchMovieByIdRequest, fetchMovieByIdSaga),
+    takeLatest(Actions.FetchMovieByIdRequest, fetchMovieByIdSaga),
   ]);
 }

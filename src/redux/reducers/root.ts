@@ -2,12 +2,12 @@ import { Action } from 'common/interfaces';
 import { Actions } from '../actions/actionsTypes';
 
 interface Store {
-  movies: null;
+  movies: any[];
   movieById: null;
 }
 
 const initialState: Store = {
-  movies: null,
+  movies: [],
   movieById: null,
 };
 
@@ -17,9 +17,11 @@ export const rootReducer = (
 ): Store => {
   switch (type) {
     case Actions.FetchMoviesSuccess:
-      return { ...state, movies: payload };
-    case Actions.fetchMovieByIdSuccess:
+      return { ...state, movies: [...state.movies, ...payload] };
+    case Actions.FetchMovieByIdSuccess:
       return { ...state, movieById: payload };
+    case Actions.ResetMovies:
+      return { ...state, movies: [] };
 
     default:
       return state;
