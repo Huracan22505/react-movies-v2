@@ -4,18 +4,20 @@ export interface Action {
   meta: any;
 }
 
-// export interface Movie {
-//   id: string;
-//   name: string;
-//   cover: string;
-//   description: string;
-// }
+export interface IMovie {
+  id: string;
+  title: string;
+  poster_path: string;
+}
 
-// export interface Ticket {
-//   data: {
-//     name: string;
-//     id: string;
-//     image: string;
-//     used: boolean;
-//   };
-// }
+export interface IMovieDetails {
+  id: string;
+  title: string;
+  vote_average: number;
+  overview: string;
+  genres: Array<{
+    id: string;
+    name: string;
+  }>;
+  poster_path: string;
+}

@@ -1,9 +1,9 @@
-import { Action } from 'common/interfaces';
+import { Action, IMovieDetails } from 'common/interfaces';
 import { Actions } from '../actions/actionsTypes';
 
 interface Store {
   movies: any[];
-  movieById: null;
+  movieById: IMovieDetails | null;
 }
 
 const initialState: Store = {
