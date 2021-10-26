@@ -1,18 +1,18 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { reducers } from './reducers';
+import { rootSaga } from './sagas';
 
-import moviesReducer from './movies/movies-reducer';
+const sagaMiddleware = createSagaMiddleware();
+// const middleware = [sagaMiddleware, logger];
 
-const middleware = [...getDefaultMiddleware(), logger];
+export const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
+);
+sagaMiddleware.run(rootSaga);
 
-const store = configureStore({
-  reducer: {
-    movies: moviesReducer,
-  },
-  middleware,
-  devTools: process.env.NODE_ENV === 'development',
-});
-
-export default {
-  store,
-};
+// export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
