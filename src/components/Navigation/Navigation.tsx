@@ -1,29 +1,31 @@
-import routes from "routes";
-import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import moviesOperations from "redux/movies/movies-operations";
-
-import s from "./Navigation.module.css";
+import routes from 'routes';
+import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCounter } from 'modules/movies/counter';
+import { setFavoriteCounter } from 'redux/actions/movies-actions';
+import { selectFavoriteCount } from 'redux/selectors';
+import s from './Navigation.module.css';
 
 const Navigation = () => {
   const dispatch = useDispatch();
 
-  const [count, setCount] = useState();
+  const [count, setCount] = useState<number | null>(null);
 
-  const counter = useSelector((state) => state.movies.favoriteCount);
+  const counter = useSelector(selectFavoriteCount);
 
   useEffect(() => {
     setCount(counter);
   }, [counter]);
 
   useEffect(() => {
-    if (!localStorage.getItem("favorite")) {
-      localStorage.setItem("favorite", JSON.stringify([]));
+    if (!localStorage.getItem('favorite')) {
+      localStorage.setItem('favorite', JSON.stringify([]));
     }
 
-    dispatch(moviesOperations.getCounter());
+    const counter = getCounter();
+
+    dispatch(setFavoriteCounter(counter));
   }, [dispatch]);
 
   return (
