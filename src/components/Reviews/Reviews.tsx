@@ -1,26 +1,22 @@
 import s from './Reviews.module.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
-import axios from 'axios';
-import { IMatchParams, IReview } from 'common/interfaces';
+import { IMatchParams } from 'common/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchReviewsRequest } from 'redux/actions/movies-actions';
+import { selectRootReviews } from 'redux/selectors';
 
 function Reviews() {
-  const [reviews, setReviews] = useState<IReview[]>([]);
+  const dispatch = useDispatch();
   const match: IMatchParams = useRouteMatch();
+
+  const reviews = useSelector(selectRootReviews);
 
   useEffect(() => {
     const { movieId } = match.params;
 
-    async function fetch() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
-      );
-
-      setReviews([...response.data.results]);
-    }
-
-    fetch();
-  }, [match.params]);
+    dispatch(fetchReviewsRequest(movieId));
+  }, [dispatch, match.params]);
 
   return reviews.length ? (
     <ul className={`${s.list} list`}>

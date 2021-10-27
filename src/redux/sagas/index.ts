@@ -5,9 +5,10 @@ import {
   fetchCastSuccess,
   fetchMovieByIdSuccess,
   fetchMoviesSuccess,
+  fetchReviewsSuccess,
 } from '../actions/movies-actions';
 import { Actions } from '../actions/actionsTypes';
-import { ICast, IMovie } from 'common/interfaces/index.js';
+import { ICast, IMovie, IReview } from 'common/interfaces/index.js';
 
 interface IParams {
   payload: number;
@@ -16,7 +17,7 @@ interface IParams {
 
 export function* fetchMoviesSaga({ payload }: IParams): SagaIterator {
   try {
-    const movies = yield call(MoviesApi.getMovies, payload);
+    const movies: IMovie[] = yield call(MoviesApi.getMovies, payload);
     yield put(fetchMoviesSuccess(movies));
   } catch (error) {
     console.log('Error fetchMoviesSaga');
@@ -33,17 +34,18 @@ export function* fetchMovieByIdSaga(id: string | any): SagaIterator {
 }
 
 export function* fetchCastByIdSaga({ payload }: string | any): SagaIterator {
-  console.log(
-    '🚀 ~ file: index.ts ~ line 36 ~ function*fetchCastByIdSaga ~ payload',
-    payload,
-  );
   try {
     const cast: ICast[] = yield call(MoviesApi.getCastById, payload);
-    console.log(
-      '🚀 ~ file: index.ts ~ line 38 ~ function*fetchCastByIdSaga ~ cast',
-      cast,
-    );
     yield put(fetchCastSuccess(cast));
+  } catch (error) {
+    console.log('Error fetchCastByIdSaga');
+  }
+}
+
+export function* fetchReviewsByIdSaga({ payload }: string | any): SagaIterator {
+  try {
+    const reviews: IReview[] = yield call(MoviesApi.getReviewsById, payload);
+    yield put(fetchReviewsSuccess(reviews));
   } catch (error) {
     console.log('Error fetchCastByIdSaga');
   }
@@ -54,5 +56,6 @@ export function* rootSaga(): SagaIterator {
     takeLatest(Actions.FetchMoviesRequest, fetchMoviesSaga),
     takeLatest(Actions.FetchMovieByIdRequest, fetchMovieByIdSaga),
     takeLatest(Actions.FetchCastRequest, fetchCastByIdSaga),
+    takeLatest(Actions.FetchReviewsRequest, fetchReviewsByIdSaga),
   ]);
 }

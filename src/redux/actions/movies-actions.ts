@@ -1,4 +1,4 @@
-import { ICast, IMovie } from 'common/interfaces';
+import { ICast, IMovie, IReview } from 'common/interfaces';
 import { Actions } from './actionsTypes';
 
 export const fetchMoviesRequest = (data: number) => ({
@@ -16,6 +16,15 @@ export const fetchCastRequest = (id: string) => ({
 });
 export const fetchCastSuccess = (payload: ICast[]) => ({
   type: Actions.FetchCastSuccess,
+  payload,
+});
+
+export const fetchReviewsRequest = (id: string) => ({
+  type: Actions.FetchReviewsRequest,
+  payload: id,
+});
+export const fetchReviewsSuccess = (payload: IReview[]) => ({
+  type: Actions.FetchReviewsSuccess,
   payload,
 });
 

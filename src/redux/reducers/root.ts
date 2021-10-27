@@ -1,4 +1,10 @@
-import { Action, ICast, IMovie, IMovieDetails } from 'common/interfaces';
+import {
+  Action,
+  ICast,
+  IMovie,
+  IMovieDetails,
+  IReview,
+} from 'common/interfaces';
 import { Actions } from '../actions/actionsTypes';
 
 interface Store {
@@ -6,6 +12,7 @@ interface Store {
   movieById: IMovieDetails | null;
   favoriteCount: number | null;
   cast: ICast[];
+  reviews: IReview[];
 }
 
 const initialState: Store = {
@@ -13,6 +20,7 @@ const initialState: Store = {
   movieById: null,
   favoriteCount: null,
   cast: [],
+  reviews: [],
 };
 
 export const rootReducer = (
@@ -30,6 +38,8 @@ export const rootReducer = (
       return { ...state, favoriteCount: payload };
     case Actions.FetchCastSuccess:
       return { ...state, cast: payload };
+    case Actions.FetchReviewsSuccess:
+      return { ...state, reviews: payload };
 
     default:
       return state;

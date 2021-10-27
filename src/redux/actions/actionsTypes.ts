@@ -5,6 +5,9 @@ export enum Actions {
   FetchCastRequest = 'movies/fetchCastRequest',
   FetchCastSuccess = 'movies/fetchCastSuccess',
 
+  FetchReviewsRequest = 'movies/fetchReviewsRequest',
+  FetchReviewsSuccess = 'movies/fetchReviewsSuccess',
+
   FetchMovieByIdRequest = 'movies/fetchMovieByIdRequest',
   FetchMovieByIdSuccess = 'movies/fetchMovieByIdSuccess',
 
