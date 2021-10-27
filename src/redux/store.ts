@@ -1,4 +1,3 @@
-import logger from 'redux-logger';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -14,5 +13,4 @@ export const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

@@ -1,14 +1,16 @@
-import { Action, IMovieDetails } from 'common/interfaces';
+import { Action, IMovie, IMovieDetails } from 'common/interfaces';
 import { Actions } from '../actions/actionsTypes';
 
 interface Store {
-  movies: any[];
+  movies: IMovie[];
   movieById: IMovieDetails | null;
+  favoriteCount: number | null;
 }
 
 const initialState: Store = {
   movies: [],
   movieById: null,
+  favoriteCount: null,
 };
 
 export const rootReducer = (
@@ -22,6 +24,8 @@ export const rootReducer = (
       return { ...state, movieById: payload };
     case Actions.ResetMovies:
       return { ...state, movies: [] };
+    case Actions.SetFavoriteCounter:
+      return { ...state, favoriteCount: payload };
 
     default:
       return state;

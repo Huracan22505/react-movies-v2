@@ -4,4 +4,5 @@ export enum Actions {
   FetchMovieByIdRequest = 'movies/fetchMovieByIdRequest',
   FetchMovieByIdSuccess = 'movies/fetchMovieByIdSuccess',
   ResetMovies = 'movies/resetMovies',
+  SetFavoriteCounter = 'movies/setFavoriteCounter',
 }
