@@ -1,4 +1,4 @@
-import { Routes } from 'routes';
+import { Routes } from 'common/routes';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

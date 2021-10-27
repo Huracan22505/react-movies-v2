@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Switch } from 'react-router-dom';
-import { Routes } from 'routes';
+import { Routes } from 'common/routes';
 
 import AppBar from 'components/AppBar';
 import Loader from 'components/Loader/Loader';
