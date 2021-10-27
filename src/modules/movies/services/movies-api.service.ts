@@ -18,6 +18,15 @@ class MoviesApiService extends BaseApiService {
 
     return data;
   };
+
+  getCastById = async (movieId: string) => {
+    const response = await this.get(
+      `${this.API_HOST}/3/movie/${movieId}/credits?api_key=${this.API_KEY}&language=en-US`,
+    );
+    const { cast } = response.data;
+
+    return cast;
+  };
 }
 
 export const MoviesApi = new MoviesApiService();

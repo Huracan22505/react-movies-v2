@@ -1,33 +1,28 @@
 import s from './Cast.module.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import defaultImage from './defaultImg.png';
 import { useRouteMatch } from 'react-router';
 import { IMatchParams, ICast } from 'common/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCastRequest } from 'redux/actions/movies-actions';
+import { selectRootCast } from 'redux/selectors';
 
 function Cast() {
-  const [casts, setCasts] = useState<ICast[]>([]);
-
   const match: IMatchParams = useRouteMatch();
+  const dispatch = useDispatch();
+
+  const cast = useSelector(selectRootCast);
 
   useEffect(() => {
     const { movieId } = match.params;
 
-    async function fetch() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
-      );
-
-      setCasts([...response.data.cast]);
-    }
-
-    fetch();
-  }, [match.params]);
+    dispatch(fetchCastRequest(movieId));
+  }, [dispatch, match.params]);
 
   return (
     <ul className={`${s.list} list`}>
-      {casts &&
-        casts.map((el: ICast) => (
+      {cast &&
+        cast.map((el: ICast) => (
           <li className={s.item} key={el.credit_id}>
             <img
               className={s.img}

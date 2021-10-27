@@ -2,11 +2,12 @@ import { MoviesApi } from 'modules/movies/services/movies-api.service';
 import { put, call, takeLatest, all } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/types';
 import {
+  fetchCastSuccess,
   fetchMovieByIdSuccess,
   fetchMoviesSuccess,
 } from '../actions/movies-actions';
 import { Actions } from '../actions/actionsTypes';
-import { IMovie } from 'common/interfaces/index.js';
+import { ICast, IMovie } from 'common/interfaces/index.js';
 
 interface IParams {
   payload: number;
@@ -31,9 +32,27 @@ export function* fetchMovieByIdSaga(id: string | any): SagaIterator {
   }
 }
 
+export function* fetchCastByIdSaga({ payload }: string | any): SagaIterator {
+  console.log(
+    '🚀 ~ file: index.ts ~ line 36 ~ function*fetchCastByIdSaga ~ payload',
+    payload,
+  );
+  try {
+    const cast: ICast[] = yield call(MoviesApi.getCastById, payload);
+    console.log(
+      '🚀 ~ file: index.ts ~ line 38 ~ function*fetchCastByIdSaga ~ cast',
+      cast,
+    );
+    yield put(fetchCastSuccess(cast));
+  } catch (error) {
+    console.log('Error fetchCastByIdSaga');
+  }
+}
+
 export function* rootSaga(): SagaIterator {
   yield all([
     takeLatest(Actions.FetchMoviesRequest, fetchMoviesSaga),
     takeLatest(Actions.FetchMovieByIdRequest, fetchMovieByIdSaga),
+    takeLatest(Actions.FetchCastRequest, fetchCastByIdSaga),
   ]);
 }
