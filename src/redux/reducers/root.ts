@@ -9,7 +9,7 @@ import { Actions } from '../actions/actionsTypes';
 
 interface Store {
   movies: IMovie[];
-  movieById: IMovieDetails | null;
+  movieById: IMovieDetails;
   favoriteCount: number | null;
   cast: ICast[];
   reviews: IReview[];
@@ -17,7 +17,14 @@ interface Store {
 
 const initialState: Store = {
   movies: [],
-  movieById: null,
+  movieById: {
+    id: '',
+    title: '',
+    vote_average: 0,
+    overview: '',
+    genres: [],
+    poster_path: '',
+  },
   favoriteCount: null,
   cast: [],
   reviews: [],

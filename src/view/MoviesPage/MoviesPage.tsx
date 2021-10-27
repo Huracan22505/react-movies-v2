@@ -4,9 +4,9 @@ import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IMovie } from 'common/interfaces';
 
 import MoviesList from 'components/MoviesList';
-import { IMovie } from 'common/interfaces';
 
 function MoviesPage() {
   const [query, setQuery] = useState('');

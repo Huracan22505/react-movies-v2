@@ -24,9 +24,10 @@ export function* fetchMoviesSaga({ payload }: IParams): SagaIterator {
   }
 }
 
-export function* fetchMovieByIdSaga(id: string | any): SagaIterator {
+export function* fetchMovieByIdSaga({ id }: string | any): SagaIterator {
   try {
     const movie: IMovie = yield call(MoviesApi.getMovieById, id);
+
     yield put(fetchMovieByIdSuccess(movie));
   } catch (error) {
     console.log('Error fetchMovieByIdSaga');

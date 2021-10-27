@@ -1,7 +1,6 @@
 import s from './MovieDetailsPage.module.css';
-import axios from 'axios';
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { lazy, Suspense, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Route,
   NavLink,
@@ -16,7 +15,11 @@ import Loader from 'react-loader-spinner';
 import defaultImage from '../../images/loading.gif';
 import { IMatchParams, IMovieDetails } from 'common/interfaces';
 import { setCounter } from 'modules/movies/counter';
-import { setFavoriteCounter } from 'redux/actions/movies-actions';
+import {
+  fetchMovieByIdRequest,
+  setFavoriteCounter,
+} from 'redux/actions/movies-actions';
+import { selectRootMovieById } from 'redux/selectors';
 
 const Cast = lazy(
   () => import('components/Cast' /* webpackChunkName: "Cast" */),
@@ -34,37 +37,19 @@ interface ILocationState {
 }
 
 export default function MovieDetailsPage() {
-  const [detailsPage, setDetailsPage] = useState<IMovieDetails>({
-    overview: '',
-    id: '',
-    title: '',
-    vote_average: 0,
-    genres: [],
-    poster_path: '',
-  });
-
   const dispatch = useDispatch();
   const location: ILocationState = useLocation();
   const history = useHistory();
   const match: IMatchParams = useRouteMatch();
 
   const favoriteBtn = useRef<HTMLButtonElement>(null);
+  const detailsPage = useSelector(selectRootMovieById);
 
   useEffect(() => {
     const { movieId } = match.params;
 
-    async function fetch() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
-      );
-
-      setDetailsPage({
-        ...response.data,
-      });
-    }
-
-    fetch();
-  }, [match.params]);
+    dispatch(fetchMovieByIdRequest(movieId));
+  }, [dispatch, match.params]);
 
   useEffect(() => {
     const localStore = localStorage.getItem('favorite');

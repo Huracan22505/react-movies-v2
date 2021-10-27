@@ -10,7 +10,7 @@ class MoviesApiService extends BaseApiService {
     return results;
   };
 
-  getMovieById = async ({ movieId }: { movieId: string }) => {
+  getMovieById = async (movieId: string) => {
     const response = await this.get(
       `${this.API_HOST}/3/movie/${movieId}?api_key=${this.API_KEY}&language=en-US`,
     );
