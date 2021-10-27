@@ -3,7 +3,7 @@ import { BaseApiService } from 'common/services/api.service';
 class MoviesApiService extends BaseApiService {
   getMovies = async (page: number) => {
     const response = await this.get(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=cac5c08a938bff767b15f4beaa543e5a&page=${page}`,
+      `${this.API_HOST}/3/trending/movie/day?api_key=${this.API_KEY}&page=${page}`,
     );
     const { results } = response.data;
 
@@ -12,7 +12,7 @@ class MoviesApiService extends BaseApiService {
 
   getMovieById = async ({ movieId }: { movieId: string }) => {
     const response = await this.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
+      `${this.API_HOST}/3/movie/${movieId}?api_key=${this.API_KEY}&language=en-US`,
     );
     const { data } = response;
 
