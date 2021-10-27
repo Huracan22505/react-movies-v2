@@ -4,7 +4,7 @@ import { SagaIterator } from '@redux-saga/types';
 import {
   fetchMovieByIdSuccess,
   fetchMoviesSuccess,
-} from '../actions/movies-actions.js';
+} from '../actions/movies-actions';
 import { Actions } from '../actions/actionsTypes';
 import { IMovie } from 'common/interfaces/index.js';
 
