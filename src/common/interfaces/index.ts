@@ -21,3 +21,22 @@ export interface IMovieDetails {
   }>;
   poster_path: string;
 }
+
+export interface IMatchParams {
+  path: string;
+  url: string;
+  params: { movieId: string };
+}
+
+export interface ICast {
+  credit_id: number;
+  profile_path: string;
+  name: string;
+  character: string;
+}
+
+export interface IReview {
+  id: string;
+  author: string;
+  content: string;
+}

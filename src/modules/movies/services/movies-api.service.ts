@@ -1,12 +1,7 @@
 import { BaseApiService } from 'common/services/api.service';
 
-interface IProps {
-  page: string;
-  movieId: string;
-}
-
 class MoviesApiService extends BaseApiService {
-  getMovies = async (page: IProps) => {
+  getMovies = async (page: number) => {
     const response = await this.get(
       `https://api.themoviedb.org/3/trending/movie/day?api_key=cac5c08a938bff767b15f4beaa543e5a&page=${page}`,
     );
@@ -15,7 +10,7 @@ class MoviesApiService extends BaseApiService {
     return results;
   };
 
-  getMovieById = async ({ movieId }: IProps) => {
+  getMovieById = async ({ movieId }: { movieId: string }) => {
     const response = await this.get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
     );

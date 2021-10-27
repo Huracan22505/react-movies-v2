@@ -3,17 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import defaultImage from './defaultImg.png';
 import { useRouteMatch } from 'react-router';
-
-interface IMatchParams {
-  params: { movieId: string };
-}
-
-interface ICast {
-  credit_id: number;
-  profile_path: string;
-  name: string;
-  character: string;
-}
+import { IMatchParams, ICast } from 'common/interfaces';
 
 function Cast() {
   const [casts, setCasts] = useState<ICast[]>([]);

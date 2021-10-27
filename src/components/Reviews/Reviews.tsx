@@ -1,17 +1,8 @@
 import s from './Reviews.module.css';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
 import axios from 'axios';
-
-interface IMatchParams {
-  params: { movieId: string };
-}
-
-interface IReview {
-  id: string;
-  author: string;
-  content: string;
-}
+import { IMatchParams, IReview } from 'common/interfaces';
 
 function Reviews() {
   const [reviews, setReviews] = useState<IReview[]>([]);
