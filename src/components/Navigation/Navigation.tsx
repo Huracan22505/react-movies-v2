@@ -1,4 +1,4 @@
-import routes from 'routes';
+import { Routes } from 'routes';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +34,7 @@ const Navigation = () => {
         <li className={s.item}>
           <NavLink
             exact
-            to={routes.home}
+            to={Routes.Home}
             className="navLink"
             activeClassName="navLinkActive"
           >
@@ -43,7 +43,7 @@ const Navigation = () => {
         </li>
         <li className={s.item}>
           <NavLink
-            to={routes.movies}
+            to={Routes.Movies}
             className="navLink"
             activeClassName="navLinkActive"
           >
@@ -54,7 +54,7 @@ const Navigation = () => {
         <li className={s.item}>
           <NavLink
             exact
-            to={routes.favorite}
+            to={Routes.Favorite}
             className="navLink"
             activeClassName="navLinkActive"
           >

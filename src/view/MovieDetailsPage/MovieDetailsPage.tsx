@@ -10,7 +10,7 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import routes from 'routes';
+import { Routes } from 'routes';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 import defaultImage from '../../images/loading.gif';
@@ -92,7 +92,7 @@ export default function MovieDetailsPage() {
     //   return history.push(location.state.from);
     // }
 
-    history.push(location?.state?.from || routes.home);
+    history.push(location?.state?.from || Routes.Home);
   };
 
   const handleAddToFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
