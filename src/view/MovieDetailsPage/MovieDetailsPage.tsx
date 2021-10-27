@@ -13,9 +13,10 @@ import {
 import routes from 'routes';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
-
 import defaultImage from '../../images/loading.gif';
 import { IMovieDetails } from 'common/interfaces';
+import { setCounter } from 'modules/movies/counter';
+import { setFavoriteCounter } from 'redux/actions/movies-actions';
 
 const Cast = lazy(
   () => import('components/Cast' /* webpackChunkName: "Cast" */),
@@ -101,7 +102,9 @@ export default function MovieDetailsPage() {
   };
 
   const handleAddToFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // dispatch(moviesOperations.setCounter(e, detailsPage));
+    const counter = setCounter(e, detailsPage);
+
+    dispatch(setFavoriteCounter(counter));
   };
 
   const {
