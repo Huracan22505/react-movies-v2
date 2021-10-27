@@ -1,9 +1,13 @@
-import s from "./FavoritePage.module.css";
+import s from './FavoritePage.module.css';
 
-import MoviesList from "components/MoviesList";
+import MoviesList from 'components/MoviesList';
 
 export default function FavoritePage() {
-  const movies = JSON.parse(localStorage.getItem("favorite"));
+  const localStore = localStorage.getItem('favorite');
+  if (typeof localStore !== 'string')
+    throw new Error('Local Storage not found');
+
+  const movies = JSON.parse(localStore);
 
   return (
     <div className={`container`}>
