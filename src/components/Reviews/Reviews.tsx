@@ -1,19 +1,28 @@
-import s from "./Reviews.module.css";
-import React, { useState, useEffect } from "react";
-import { useRouteMatch } from "react-router";
+import s from './Reviews.module.css';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from 'react-router';
+import axios from 'axios';
 
-import axios from "axios";
+interface IMatchParams {
+  params: { movieId: string };
+}
+
+interface IReview {
+  id: string;
+  author: string;
+  content: string;
+}
 
 function Reviews() {
-  const [reviews, setReviews] = useState([]);
-  const match = useRouteMatch();
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  const match: IMatchParams = useRouteMatch();
 
   useEffect(() => {
     const { movieId } = match.params;
 
     async function fetch() {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US`,
       );
 
       setReviews([...response.data.results]);
