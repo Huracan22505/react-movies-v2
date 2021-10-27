@@ -21,3 +21,8 @@ export const fetchMovieByIdSuccess = data => ({
 export const resetMovies = () => ({
   type: Actions.ResetMovies,
 });
+
+export const setFavoriteCounter = data => ({
+  type: Actions.SetFavoriteCounter,
+  payload: data,
+});
