@@ -2,9 +2,9 @@ import { Routes } from 'common/routes';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCounter } from 'modules/movies/counter';
-import { setFavoriteCounter } from 'redux/actions/movies-actions';
-import { selectFavoriteCount } from 'redux/selectors';
+import { getCounter } from 'common/utils/counter';
+import { setFavoriteCounter } from 'common/store/actions/movies-actions';
+import { selectFavoriteCount } from 'common/store/selectors';
 import s from './Navigation.module.css';
 
 const Navigation = () => {

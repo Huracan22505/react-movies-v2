@@ -1,4 +1,4 @@
-import { State } from 'redux/reducers';
+import { State } from 'common/store/reducers';
 
 export const selectMoviesItems = (state: State) =>
   state.movies.moviesItems.entities;

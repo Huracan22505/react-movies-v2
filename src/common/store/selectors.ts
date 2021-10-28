@@ -1,5 +1,5 @@
 import { ICast, IMovie, IMovieDetails, IReview } from 'common/interfaces';
-import { State } from 'redux/reducers';
+import { State } from 'common/store/reducers';
 
 export const selectRootMovies = (state: State): IMovie[] => state.root.movies;
 export const selectRootMovieById = (state: State): IMovieDetails =>

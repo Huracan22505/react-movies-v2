@@ -4,8 +4,8 @@ import defaultImage from './defaultImg.png';
 import { useRouteMatch } from 'react-router';
 import { IMatchParams, ICast } from 'common/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCastRequest } from 'redux/actions/movies-actions';
-import { selectRootCast } from 'redux/selectors';
+import { fetchCastRequest } from 'common/store/actions/movies-actions';
+import { selectRootCast } from 'common/store/selectors';
 
 function Cast() {
   const match: IMatchParams = useRouteMatch();

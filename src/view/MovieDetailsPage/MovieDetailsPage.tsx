@@ -14,12 +14,12 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 import defaultImage from '../../images/loading.gif';
 import { IMatchParams, IMovieDetails } from 'common/interfaces';
-import { setCounter } from 'modules/movies/counter';
+import { setCounter } from 'common/utils/counter';
 import {
   fetchMovieByIdRequest,
   setFavoriteCounter,
-} from 'redux/actions/movies-actions';
-import { selectRootMovieById } from 'redux/selectors';
+} from 'common/store/actions/movies-actions';
+import { selectRootMovieById } from 'common/store/selectors';
 
 const Cast = lazy(
   () => import('components/Cast' /* webpackChunkName: "Cast" */),

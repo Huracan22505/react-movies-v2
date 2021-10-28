@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
 import { IMatchParams } from 'common/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchReviewsRequest } from 'redux/actions/movies-actions';
-import { selectRootReviews } from 'redux/selectors';
+import { fetchReviewsRequest } from 'common/store/actions/movies-actions';
+import { selectRootReviews } from 'common/store/selectors';
 
 function Reviews() {
   const dispatch = useDispatch();

@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MoviesList from 'components/MoviesList';
 import Loader from 'components/Loader/Loader';
-import { fetchMoviesRequest, resetMovies } from 'redux/actions/movies-actions';
-import { selectRootMovies } from 'redux/selectors';
+import {
+  fetchMoviesRequest,
+  resetMovies,
+} from 'common/store/actions/movies-actions';
+import { selectRootMovies } from 'common/store/selectors';
 
 export default function Homepage() {
   const [page, setPage] = useState(1);
