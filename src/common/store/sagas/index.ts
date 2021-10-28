@@ -1,4 +1,4 @@
-import { MoviesApi } from 'modules/movies/services/movies-api.service';
+import { MoviesApi } from '../../services/movies-api.service';
 import { put, call, takeLatest, all, fork } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/types';
 import {
