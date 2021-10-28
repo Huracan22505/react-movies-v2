@@ -1,47 +1,46 @@
 import s from './MoviesPage.module.css';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { IMovie } from 'common/interfaces';
 
 import MoviesList from 'components/MoviesList';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMoviesItems } from 'modules/MoviesPage/store/selectors';
+import { getMovies } from 'modules/MoviesPage/store/actions/movies';
 
 function MoviesPage() {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState<IMovie[]>([]);
 
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const movies = useSelector(selectMoviesItems);
 
   useEffect(() => {
-    if (location.search) fetch(location.search.slice(7));
-  }, [location.search]);
+    if (location.search) dispatch(getMovies(location.search.slice(7)));
+  }, [dispatch, location.search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.currentTarget.value.toLowerCase());
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    fetch(query);
+  const fetch = async () => {
+    await dispatch(getMovies(query));
   };
 
-  const fetch = async (query: string) => {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=cac5c08a938bff767b15f4beaa543e5a&language=en-US&page=1&include_adult=false`,
-    );
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    if (response.data.results.length < 1) {
-      toast.error('Wrong request. No results!');
-      setQuery('');
-      return;
-    }
+    await fetch();
+
+    // if (movies.length < 1) {
+    //   toast.error('Wrong request. No results!');
+    //   setQuery('');
+    //   return;
+    // }
 
     history.push({ ...location, search: `query=${query}` });
-    setMovies([...response.data.results]);
   };
 
   return (

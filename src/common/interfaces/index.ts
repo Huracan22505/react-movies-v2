@@ -1,7 +1,7 @@
 export interface Action {
   type: string;
-  payload: any;
-  meta: any;
+  payload?: any;
+  meta?: any;
 }
 
 export interface IMovie {

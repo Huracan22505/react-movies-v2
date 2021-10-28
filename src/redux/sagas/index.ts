@@ -1,5 +1,5 @@
 import { MoviesApi } from 'modules/movies/services/movies-api.service';
-import { put, call, takeLatest, all } from 'redux-saga/effects';
+import { put, call, takeLatest, all, fork } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/types';
 import {
   fetchCastSuccess,
@@ -9,6 +9,7 @@ import {
 } from '../actions/movies-actions';
 import { Actions } from '../actions/actionsTypes';
 import { ICast, IMovie, IReview } from 'common/interfaces/index.js';
+import { moviesSaga } from 'modules/MoviesPage/store';
 
 interface IParams {
   payload: number;
@@ -58,5 +59,6 @@ export function* rootSaga(): SagaIterator {
     takeLatest(Actions.FetchMovieByIdRequest, fetchMovieByIdSaga),
     takeLatest(Actions.FetchCastRequest, fetchCastByIdSaga),
     takeLatest(Actions.FetchReviewsRequest, fetchReviewsByIdSaga),
+    fork(moviesSaga),
   ]);
 }
