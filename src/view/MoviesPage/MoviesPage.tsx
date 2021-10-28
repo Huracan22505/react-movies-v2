@@ -6,8 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import MoviesList from 'components/MoviesList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMoviesItems } from 'modules/MoviesPage/store/selectors';
+import {
+  selectMoviesIsLoading,
+  selectMoviesItems,
+} from 'modules/MoviesPage/store/selectors';
 import { getMovies } from 'modules/MoviesPage/store/actions/movies';
+import Loader from 'components/Loader/Loader';
 
 function MoviesPage() {
   const [query, setQuery] = useState('');
@@ -16,6 +20,7 @@ function MoviesPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const movies = useSelector(selectMoviesItems);
+  const isLoading = useSelector(selectMoviesIsLoading);
 
   useEffect(() => {
     if (location.search) dispatch(getMovies(location.search.slice(7)));
@@ -60,6 +65,7 @@ function MoviesPage() {
       </form>
       <ToastContainer />
 
+      {isLoading && <Loader />}
       {movies && <MoviesList movies={movies} />}
     </div>
   );
