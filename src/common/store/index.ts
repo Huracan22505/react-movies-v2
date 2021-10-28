@@ -11,5 +11,3 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 sagaMiddleware.run(rootSaga);
-
-export type RootState = ReturnType<typeof store.getState>;
